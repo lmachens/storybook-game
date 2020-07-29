@@ -1,6 +1,6 @@
-# Storybook HTML
+# Storybook Game
 
-This repository demonstrates how to use [Storybook](https://storybook.js.org/) for HTML and CSS/SCSS. You can use this repository as template.
+This repository demonstrates how to use [Storybook](https://storybook.js.org/) for basic game development based on Canvas. You can use this repository as template.
 
 ## Getting Started
 
