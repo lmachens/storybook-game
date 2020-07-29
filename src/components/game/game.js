@@ -24,11 +24,11 @@ const clear = (canvas) => {
   context.clearRect(0, 0, canvas.width, canvas.height);
 };
 
-const drawSnake = (canvas, snake) => {
+const drawPlayer = (canvas, player) => {
   const cellWidth = canvas.width / COLS;
   const cellHeight = canvas.height / ROWS;
-  const offsetLeft = snake.left * cellWidth;
-  const offsetTop = snake.top * cellHeight;
+  const offsetLeft = player.left * cellWidth;
+  const offsetTop = player.top * cellHeight;
 
   const context = canvas.getContext("2d");
   context.beginPath();
@@ -38,7 +38,7 @@ const drawSnake = (canvas, snake) => {
   context.closePath();
 };
 
-const createSnake = () => {
+const createPlayer = () => {
   return {
     left: COLS / 2,
     top: ROWS / 2,
@@ -48,25 +48,25 @@ const createSnake = () => {
   };
 };
 
-const moveSnake = (snake, timeGone) => {
-  const positionOffset = (snake.speed * timeGone) / 1000;
-  switch (snake.direction) {
+const movePlayer = (player, timeGone) => {
+  const positionOffset = (player.speed * timeGone) / 1000;
+  switch (player.direction) {
     case "TOP":
-      snake.top = (snake.top - positionOffset) % COLS;
-      if (snake.top < 0) {
-        snake.top = ROWS;
+      player.top = (player.top - positionOffset) % COLS;
+      if (player.top < 0) {
+        player.top = ROWS;
       }
       break;
     case "RIGHT":
-      snake.left = (snake.left + positionOffset) % COLS;
+      player.left = (player.left + positionOffset) % COLS;
       break;
     case "BOTTOM":
-      snake.top = (snake.top + positionOffset) % COLS;
+      player.top = (player.top + positionOffset) % COLS;
       break;
     case "LEFT":
-      snake.left = snake.left - positionOffset;
-      if (snake.left < 0) {
-        snake.left = COLS;
+      player.left = player.left - positionOffset;
+      if (player.left < 0) {
+        player.left = COLS;
       }
       break;
   }
@@ -74,7 +74,7 @@ const moveSnake = (snake, timeGone) => {
 
 export const createGame = (width, height) => {
   const canvas = createCanvas();
-  const snake = createSnake();
+  const player = createPlayer();
 
   resize(canvas, width, height);
 
@@ -83,8 +83,8 @@ export const createGame = (width, height) => {
     const loop = () => {
       clear(canvas);
       const now = Date.now();
-      moveSnake(snake, now - lastDrawing);
-      drawSnake(canvas, snake);
+      movePlayer(player, now - lastDrawing);
+      drawPlayer(canvas, player);
       lastDrawing = now;
 
       requestAnimationFrame(loop);
@@ -94,26 +94,26 @@ export const createGame = (width, height) => {
 
   window.addEventListener("keydown", (event) => {
     if (event.keyCode === KEY.TOP) {
-      snake.direction = "TOP";
+      player.direction = "TOP";
       return;
     }
     if (event.keyCode === KEY.RIGHT) {
-      snake.direction = "RIGHT";
+      player.direction = "RIGHT";
       return;
     }
     if (event.keyCode === KEY.BOTTOM) {
-      snake.direction = "BOTTOM";
+      player.direction = "BOTTOM";
       return;
     }
     if (event.keyCode === KEY.LEFT) {
-      snake.direction = "LEFT";
+      player.direction = "LEFT";
       return;
     }
   });
 
   startLoop();
 
-  return { canvas, snake };
+  return { canvas, player };
 };
 
 export const createControls = (game) => {
@@ -124,7 +124,7 @@ export const createControls = (game) => {
   });
 
   faster.addEventListener("click", () => {
-    game.snake.speed++;
+    game.player.speed++;
   });
 
   const slower = createElement("button", {
@@ -132,7 +132,7 @@ export const createControls = (game) => {
     className: "controls__btn",
   });
   slower.addEventListener("click", () => {
-    game.snake.speed--;
+    game.player.speed--;
   });
 
   controls.append(faster);
