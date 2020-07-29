@@ -44,16 +44,17 @@ const drawPlayer = (canvas, player) => {
 
 const createPlayer = () => {
   return {
-    left: COLS / 2,
-    top: ROWS / 2,
-    length: 1,
+    left: COLS / 2, // start position
+    top: ROWS / 2, // start position
     speed: 5, // fields per second
-    direction: "RIGHT", // TOP, RIGHT, BOTTOM, LEFT
+    direction: "RIGHT", // TOP, RIGHT, BOTTOM, LEFT,
+    aliveSince: Date.now(),
   };
 };
 
-const movePlayer = (player, timeGone) => {
-  const positionOffset = (player.speed * timeGone) / 1000;
+const movePlayer = (player, timePassed) => {
+  const positionOffset = (player.speed * timePassed) / 1000;
+
   switch (player.direction) {
     case "TOP":
       player.top = (player.top - positionOffset) % COLS;
@@ -139,7 +140,19 @@ export const createControls = (game) => {
     game.player.speed--;
   });
 
+  const aliveTime = createElement("div", {
+    className: "controls__time",
+    innerText: "0",
+  });
+
+  setInterval(() => {
+    aliveTime.innerText = Math.floor(
+      (Date.now() - game.player.aliveSince) / 1000
+    );
+  }, 1000);
+
   controls.append(faster);
   controls.append(slower);
+  controls.append(aliveTime);
   return controls;
 };
