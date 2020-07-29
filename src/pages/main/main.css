@@ -1,12 +1,12 @@
-.welcome {
+.main {
   height: 100vh;
   width: 100vw;
-  background-color: #1fc8db;
+  background-color: #db691f;
   background-image: linear-gradient(
     141deg,
-    #9fb8ad 0%,
-    #1fc8db 51%,
-    #2cb5e8 75%
+    #d3da3b 0%,
+    #db691f 51%,
+    #9c1616 75%
   );
   display: flex;
   flex-direction: column;
