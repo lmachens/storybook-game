@@ -1,0 +1,20 @@
+.game {
+  background-color: #050505;
+}
+
+.container {
+  position: relative;
+}
+
+.controls {
+  position: absolute;
+  right: 0;
+}
+
+.controls__btn {
+  color: white;
+  background: #1fc8db59;
+  border: none;
+  padding: 4px;
+  margin: 1px;
+}
