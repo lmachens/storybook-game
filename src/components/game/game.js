@@ -28,7 +28,11 @@ const drawPlayer = (canvas, player) => {
   const cellWidth = canvas.width / COLS;
   const cellHeight = canvas.height / ROWS;
   const offsetLeft = player.left * cellWidth;
+  // const offsetLeft =
+  //   player.left * cellWidth - ((player.left * cellWidth) % cellWidth);
   const offsetTop = player.top * cellHeight;
+  // const offsetTop =
+  //   player.top * cellHeight - ((player.top * cellHeight) % cellHeight);
 
   const context = canvas.getContext("2d");
   context.beginPath();
