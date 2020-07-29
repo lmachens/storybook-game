@@ -140,6 +140,14 @@ export const createControls = (game) => {
     game.player.speed--;
   });
 
+  const reset = createElement("button", {
+    innerText: "RESET!",
+    className: "controls__btn",
+  });
+  reset.addEventListener("click", () => {
+    Object.assign(game.player, createPlayer());
+  });
+
   const aliveTime = createElement("div", {
     className: "controls__time",
     innerText: "0",
@@ -149,8 +157,9 @@ export const createControls = (game) => {
     aliveTime.innerText = Math.floor(
       (Date.now() - game.player.aliveSince) / 1000
     );
-  }, 1000);
+  }, 100);
 
+  controls.append(reset);
   controls.append(faster);
   controls.append(slower);
   controls.append(aliveTime);
