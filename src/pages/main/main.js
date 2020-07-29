@@ -1,5 +1,6 @@
+import { createElement } from "../../utils/elements";
+
 export const createMain = () => {
-  const main = document.createElement("main");
-  main.className = "main";
+  const main = createElement("main", { className: "main" });
   return main;
 };

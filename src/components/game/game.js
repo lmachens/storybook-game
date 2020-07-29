@@ -1,3 +1,5 @@
+import { createElement } from "../../utils/elements";
+
 const COLS = 16;
 const ROWS = 16;
 const KEY = {
@@ -8,8 +10,7 @@ const KEY = {
 };
 
 const createCanvas = () => {
-  const canvas = document.createElement("canvas");
-  canvas.className = "game";
+  const canvas = createElement("canvas", { className: "game" });
   return canvas;
 };
 
@@ -116,19 +117,20 @@ export const createGame = (width, height) => {
 };
 
 export const createControls = (game) => {
-  const controls = document.createElement("div");
-  controls.className = "controls";
-  const faster = document.createElement("button");
-  faster.innerText = "FASTER!";
-  faster.className = "controls__btn";
+  const controls = createElement("div", { className: "controls " });
+  const faster = createElement("button", {
+    innerText: "FASTER!",
+    className: "controls__btn",
+  });
 
   faster.addEventListener("click", () => {
     game.snake.speed++;
   });
 
-  const slower = document.createElement("button");
-  slower.innerText = "SLOWER!";
-  slower.className = "controls__btn";
+  const slower = createElement("button", {
+    innerText: "SLOWER!",
+    className: "controls__btn",
+  });
   slower.addEventListener("click", () => {
     game.snake.speed--;
   });
