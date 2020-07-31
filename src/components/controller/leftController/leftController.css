@@ -1,0 +1,57 @@
+.leftController {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: blueviolet;
+  padding: 50px;
+}
+
+.lamp {
+  width: 100px;
+  height: 50px;
+  border-radius: 15px;
+  background-color: chartreuse;
+  border: solid 2px rgb(109, 182, 1);
+}
+
+.keys {
+  width: 300px;
+  height: 300px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.keys > button {
+  border-radius: 100%;
+  background: rgb(46, 47, 69);
+  background: linear-gradient(
+    0deg,
+    rgba(46, 47, 69, 1) 0%,
+    rgba(94, 94, 150, 1) 75%
+  );
+  border: solid 3px rgb(46, 47, 69);
+}
+
+#btn-up {
+  grid-area: 1 / 2 / 2 / 2;
+}
+
+#btn-right {
+  grid-area: 2 / 3 / 3 / 4;
+}
+
+/* #btn-middle {
+  grid-area: 2 / 2 / 3 / 3;
+} */
+
+#btn-left {
+  grid-area: 2 / 1 / 3 / 2;
+}
+
+#btn-down {
+  grid-area: 3 / 2 / 4 / 3;
+}
