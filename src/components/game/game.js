@@ -70,10 +70,15 @@ const createPlayer = () => {
 };
 const createObstacle = () => {
   return {
-    left: COLS / 3, // start position
-    top: ROWS / 2, // start position
+    left: setRandomPosition(COLS), // start position
+    top: 10,
+    // setRandomPosition(ROWS), // start position
   };
 };
+
+function setRandomPosition(baseValue) {
+  return Math.random() * (baseValue - 1) + 1;
+}
 
 const movePlayer = (player, timePassed) => {
   const positionOffset = (player.speed * timePassed) / 1000;
@@ -103,12 +108,19 @@ const movePlayer = (player, timePassed) => {
 export const createGame = (width, height) => {
   const canvas = createCanvas();
   let player = createPlayer();
-  const obstacle = createObstacle();
+
+  let obstacle = "";
+  setTimeout(function () {
+    console.log("Alert");
+    obstacle = createObstacle();
+  }, 3000);
 
   resize(canvas, width, height);
 
   const startLoop = () => {
     let lastDrawing = Date.now();
+    console.log("Start Loop");
+
     const loop = () => {
       clear(canvas);
       const now = Date.now();
@@ -118,7 +130,8 @@ export const createGame = (width, height) => {
       drawObstacle(canvas, obstacle);
 
       lastDrawing = now;
-      // console.log(player.left - obstacle.left);
+
+      createObstacle();
 
       function calcDistance() {
         let topDistance = player.top - obstacle.top;
