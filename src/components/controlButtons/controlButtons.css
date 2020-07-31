@@ -1,0 +1,26 @@
+.nokiaControlButtons > div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px;
+  width: 100vw;
+}
+
+.nokiaControlButtons > div > button:first-child {
+  border: none;
+  padding: 15px 50px;
+  border-radius: 25px 25px 25px 60px;
+  box-shadow: -1px 1px grey;
+}
+.nokiaControlButtons > div > button:nth-child(2) {
+  border: none;
+  padding: 15px 50px;
+  border-radius: 25px 25px 40px 40px;
+  box-shadow: -1px 1px grey;
+}
+.nokiaControlButtons > div > button:last-child {
+  border: none;
+  padding: 15px 50px;
+  border-radius: 25px 25px 60px 25px;
+  box-shadow: -1px 1px grey;
+}
