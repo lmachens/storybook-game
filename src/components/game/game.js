@@ -102,7 +102,7 @@ const movePlayer = (player, timePassed) => {
 
 export const createGame = (width, height) => {
   const canvas = createCanvas();
-  const player = createPlayer();
+  let player = createPlayer();
   const obstacle = createObstacle();
 
   resize(canvas, width, height);
@@ -129,9 +129,18 @@ export const createGame = (width, height) => {
 
         return Math.sqrt(topDistance + leftDistance);
       }
+
       let distance = calcDistance();
       if (distance < 1) {
-        alert("Test");
+        player.speed = 0;
+        let restart = confirm("Restart?");
+        if (restart == true) {
+          player = createPlayer();
+        } else {
+          alert("Thanks for playing");
+          player.left = 8;
+          player.top = 8;
+        }
       }
 
       requestAnimationFrame(loop);
