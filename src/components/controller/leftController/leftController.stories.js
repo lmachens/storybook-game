@@ -3,7 +3,7 @@ import "./leftController.css";
 import "./leftController";
 import { createLeftController } from "./leftController";
 
-export default { title: "game/leftController" };
+export default { title: "Components/Controller/LeftController" };
 
 export const basic = () => {
   const leftController = createLeftController();
