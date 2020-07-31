@@ -41,6 +41,23 @@ const drawPlayer = (canvas, player) => {
   context.fill();
   context.closePath();
 };
+const drawObstacle = (canvas, obstacle) => {
+  const cellWidth = canvas.width / COLS;
+  const cellHeight = canvas.height / ROWS;
+  const offsetLeft = obstacle.left * cellWidth;
+  // const offsetLeft =
+  //   obstacle.left * cellWidth - ((obstacle.left * cellWidth) % cellWidth);
+  const offsetTop = obstacle.top * cellHeight;
+  // const offsetTop =
+  //   player.top * cellHeight - ((player.top * cellHeight) % cellHeight);
+
+  const context = canvas.getContext("2d");
+  context.beginPath();
+  context.rect(offsetLeft, offsetTop, cellWidth, cellHeight);
+  context.fillStyle = "green";
+  context.fill();
+  context.closePath();
+};
 
 const createPlayer = () => {
   return {
@@ -49,6 +66,12 @@ const createPlayer = () => {
     speed: 5, // fields per second
     direction: "RIGHT", // TOP, RIGHT, BOTTOM, LEFT,
     aliveSince: Date.now(),
+  };
+};
+const createObstacle = () => {
+  return {
+    left: COLS / 2, // start position
+    top: ROWS / 2, // start position
   };
 };
 
@@ -80,6 +103,7 @@ const movePlayer = (player, timePassed) => {
 export const createGame = (width, height) => {
   const canvas = createCanvas();
   const player = createPlayer();
+  const obstacle = createObstacle();
 
   resize(canvas, width, height);
 
@@ -90,6 +114,7 @@ export const createGame = (width, height) => {
       const now = Date.now();
       movePlayer(player, now - lastDrawing);
       drawPlayer(canvas, player);
+      drawObstacle(canvas, obstacle);
       lastDrawing = now;
 
       requestAnimationFrame(loop);
