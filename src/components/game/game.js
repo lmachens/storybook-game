@@ -1,5 +1,3 @@
-import playerSrc from "../../assets/player.png";
-import dog from "../../assets/dog.jpg";
 import { createElement } from "../../utils/elements";
 
 const COLS = 16;
