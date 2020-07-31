@@ -63,14 +63,14 @@ const createPlayer = () => {
   return {
     left: COLS / 2, // start position
     top: ROWS / 2, // start position
-    speed: 5, // fields per second
+    speed: 2, // fields per second
     direction: "RIGHT", // TOP, RIGHT, BOTTOM, LEFT,
     aliveSince: Date.now(),
   };
 };
 const createObstacle = () => {
   return {
-    left: COLS / 2, // start position
+    left: COLS / 3, // start position
     top: ROWS / 2, // start position
   };
 };
@@ -113,9 +113,26 @@ export const createGame = (width, height) => {
       clear(canvas);
       const now = Date.now();
       movePlayer(player, now - lastDrawing);
+
       drawPlayer(canvas, player);
       drawObstacle(canvas, obstacle);
+
       lastDrawing = now;
+      // console.log(player.left - obstacle.left);
+
+      function calcDistance() {
+        let topDistance = player.top - obstacle.top;
+        let leftDistance = player.left - obstacle.left;
+
+        topDistance *= topDistance;
+        leftDistance *= leftDistance;
+
+        return Math.sqrt(topDistance + leftDistance);
+      }
+      let distance = calcDistance();
+      if (distance < 1) {
+        alert("Test");
+      }
 
       requestAnimationFrame(loop);
     };
