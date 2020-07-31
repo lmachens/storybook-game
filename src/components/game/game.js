@@ -104,12 +104,11 @@ const movePlayer = (player, timePassed) => {
       break;
   }
 };
+let obstacles = [];
 
 export const createGame = (width, height) => {
   const canvas = createCanvas();
   let player = createPlayer();
-
-  let obstacles = [{ left: 5, top: 1 }];
 
   setInterval(function () {
     console.log("Alert");
@@ -151,14 +150,17 @@ export const createGame = (width, height) => {
         let distance = calcDistance();
         if (distance < 1) {
           player.speed = 0;
-          let restart = confirm("Restart?");
-          if (restart == true) {
-            player = createPlayer();
-          } else {
-            alert("Thanks for playing");
-            player.left = 8;
-            player.top = 8;
-          }
+
+          // let restart = confirm("Restart?");
+          // if (restart == true) {
+          //   player = createPlayer();
+          //
+          //   player.aliveSince = Date.now();
+          // } else {
+          //   alert("Thanks for playing");
+          //   player.left = 8;
+          //   player.top = 8;
+          // }
         }
       });
 
@@ -188,7 +190,7 @@ export const createGame = (width, height) => {
 
   startLoop();
 
-  return { canvas, player };
+  return { canvas, player, obstacles };
 };
 
 export const createControls = (game) => {
@@ -215,6 +217,7 @@ export const createControls = (game) => {
     className: "controls__btn",
   });
   reset.addEventListener("click", () => {
+    obstacles = [];
     Object.assign(game.player, createPlayer());
   });
 
