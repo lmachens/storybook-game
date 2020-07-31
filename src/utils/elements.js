@@ -3,3 +3,8 @@ export const createElement = (tagName, props) => {
   Object.assign(element, props);
   return element;
 };
+
+export const generateRandomNumber = (upperLimit) => {
+  let randomNumber = Math.floor(Math.random() * upperLimit) + 1;
+  return randomNumber;
+}

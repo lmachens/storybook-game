@@ -1,4 +1,4 @@
-import { createElement } from "../../utils/elements";
+import { createElement, generateRandomNumber } from "../../utils/elements";
 
 const COLS = 16;
 const ROWS = 16;
@@ -57,7 +57,11 @@ const createPlayer = () => {
 };
 
 const createGameObject = (gameObjectImage, canvas) => {
-  return { img: gameObjectImage, xPos: 20, yPos: 20 };
+  return {
+    img: gameObjectImage,
+    xPos: generateRandomNumber(canvas.width),
+    yPos: generateRandomNumber(canvas.height),
+  };
 };
 
 const drawGameObject = (canvas, gameObject) => {
