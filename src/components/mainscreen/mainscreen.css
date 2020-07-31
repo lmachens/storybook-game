@@ -1,0 +1,15 @@
+.nokiaScreen {
+  display: flex;
+  flex-direction: column;
+}
+
+.nokiaScreen div:first-child {
+  background-color: #545d66;
+  color: white;
+  text-align: center;
+  text-transform: uppercase;
+}
+.nokiaScreen div:last-child {
+  background-color: #95a47d;
+  color: white;
+}
