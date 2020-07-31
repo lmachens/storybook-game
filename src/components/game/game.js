@@ -9,6 +9,10 @@ const KEY = {
   BOTTOM: 40,
 };
 
+const APPLE = new Image();
+APPLE.src =
+  "data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+QXBwbGUgaWNvbjwvdGl0bGU+PHBhdGggZD0iTTcuMDc4IDIzLjU1Yy0uNDczLS4zMTYtLjg5My0uNzAzLTEuMjQ0LTEuMTUtLjM4My0uNDYzLS43MzgtLjk1LTEuMDY0LTEuNDU0LS43NjYtMS4xMi0xLjM2NS0yLjM0NS0xLjc4LTMuNjM2LS41LTEuNTAyLS43NDMtMi45NC0uNzQzLTQuMzQ3IDAtMS41Ny4zNC0yLjk0IDEuMDAyLTQuMDkuNDktLjkgMS4yMi0xLjY1MyAyLjEtMi4xODIuODUtLjUzIDEuODQtLjgyIDIuODQtLjg0LjM1IDAgLjczLjA1IDEuMTMuMTUuMjkuMDguNjQuMjEgMS4wNy4zNy41NS4yMS44NS4zNC45NS4zNy4zMi4xMi41OS4xNy44LjE3LjE2IDAgLjM5LS4wNS42NDUtLjEzLjE0NS0uMDUuNDItLjE0LjgxLS4zMS4zODYtLjE0LjY5Mi0uMjYuOTM1LS4zNS4zNy0uMTEuNzI4LS4yMSAxLjA1LS4yNi4zOS0uMDYuNzc3LS4wOCAxLjE0OC0uMDUuNzEuMDUgMS4zNi4yIDEuOTQuNDIgMS4wMi40MSAxLjg0MyAxLjA1IDIuNDU3IDEuOTYtLjI2LjE2LS41LjM0Ni0uNzI1LjU1LS40ODcuNDMtLjkuOTQtMS4yMyAxLjUwNS0uNDMuNzctLjY1IDEuNjQtLjY0NCAyLjUyLjAxNSAxLjA4My4yOSAyLjAzNS44NCAyLjg2LjM4Ny42LjkwNCAxLjExNCAxLjUzNCAxLjUzNi4zMS4yMS41ODIuMzU1Ljg0LjQ1LS4xMi4zNzUtLjI1Mi43NC0uNDA1IDEuMS0uMzQ3LjgwNy0uNzYgMS41OC0xLjI1IDIuMzEtLjQzMi42My0uNzcyIDEuMS0xLjAzIDEuNDEtLjQwMi40OC0uNzkuODQtMS4xOCAxLjA5Ny0uNDMuMjg1LS45MzUuNDM2LTEuNDUyLjQzNi0uMzUuMDE1LS43LS4wMy0xLjAzNC0uMTI3LS4yOS0uMDk1LS41NzYtLjIwMi0uODU2LS4zMjMtLjI5My0uMTM0LS41OTYtLjI0OC0uOTA1LS4zNC0uMzgtLjEtLjc3LS4xNDgtMS4xNjQtLjE0Ny0uNCAwLS43OS4wNS0xLjE2LjE0NS0uMzEuMDg4LS42MS4xOTYtLjkwNy4zMjUtLjQyLjE3NS0uNjk1LjI5LS44NTUuMzQtLjMyNC4wOTYtLjY1Ni4xNTQtLjk5LjE3NS0uNTIgMC0xLjAwNC0uMTUtMS40ODYtLjQ1em02Ljg1NC0xOC40NmMtLjY4LjM0LTEuMzI2LjQ4NC0xLjk3My40MzYtLjEtLjY0NiAwLTEuMzEuMjctMi4wMzcuMjQtLjYyLjU2LTEuMTggMS0xLjY4LjQ2LS41MiAxLjAxLS45NSAxLjYzLTEuMjYuNjYtLjM0IDEuMjktLjUyIDEuODktLjU1LjA4LjY4IDAgMS4zNS0uMjUgMi4wNy0uMjI4LjY0LS41NjggMS4yMy0xIDEuNzYtLjQzNS41Mi0uOTc1Ljk1LTEuNTg2IDEuMjZ6Ii8+PC9zdmc+";
+
 const createCanvas = () => {
   const canvas = createElement("canvas", { className: "game" });
   return canvas;
@@ -52,6 +56,23 @@ const createPlayer = () => {
   };
 };
 
+const createGameObject = (gameObjectImage, canvas) => {
+  return { img: gameObjectImage, xPos: 20, yPos: 20 };
+};
+
+const drawGameObject = (canvas, gameObject) => {
+  const cellWidth = canvas.width / COLS;
+  const cellHeight = canvas.height / ROWS;
+  const context = canvas.getContext("2d");
+  context.drawImage(
+    gameObject.img,
+    gameObject.xPos,
+    gameObject.yPos,
+    cellWidth,
+    cellHeight
+  );
+};
+
 const movePlayer = (player, timePassed) => {
   const positionOffset = (player.speed * timePassed) / 1000;
 
@@ -82,6 +103,7 @@ export const createGame = (width, height) => {
   const player = createPlayer();
 
   resize(canvas, width, height);
+  const appleObject = createGameObject(APPLE, canvas);
 
   const startLoop = () => {
     let lastDrawing = Date.now();
@@ -91,7 +113,7 @@ export const createGame = (width, height) => {
       movePlayer(player, now - lastDrawing);
       drawPlayer(canvas, player);
       lastDrawing = now;
-
+      drawGameObject(canvas, appleObject);
       requestAnimationFrame(loop);
     };
     loop();
