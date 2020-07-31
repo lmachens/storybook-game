@@ -13,7 +13,6 @@ export const MainScreen = () => {
   });
 
   const mainScreenDiv = createElement("div", {});
-
   const gameScreen = basic();
   const gameControls = controls();
 
