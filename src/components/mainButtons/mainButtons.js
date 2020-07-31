@@ -27,5 +27,9 @@ export const MainButtons = () => {
   sideButtonDiv.append(resetButton);
   sideButtonDiv.append(pauseButton);
 
+  startButton.addEventListener("click", () => {
+    confirm("Do you really want to start the game?");
+  });
+
   return OuterDIV;
 };

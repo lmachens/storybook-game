@@ -1,6 +1,7 @@
 .nokiaScreen {
   display: flex;
   flex-direction: column;
+  padding-top: 50px;
 }
 
 .nokiaScreen div:first-child {

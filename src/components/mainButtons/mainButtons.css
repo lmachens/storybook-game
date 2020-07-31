@@ -4,6 +4,9 @@
 }
 
 .nokiaMainButtons div:first-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .nokiaMainButtons div:last-child {
   display: flex;
@@ -14,19 +17,19 @@
   border: none;
   padding: 15px 50px;
   border-radius: 15px 15px 60px 60px;
-  box-shadow: -1px 1px grey;
+  box-shadow: -4px 4px black;
 }
 .nokiaMainButtons > div:last-child > button:first-child {
   border: none;
   padding: 5px 30px;
   border-radius: 15px 15px 15px 60px;
   font-size: 1.2rem;
-  box-shadow: -1px 1px grey;
+  box-shadow: -4px 4px black;
 }
 .nokiaMainButtons > div:last-child > button:last-child {
   border: none;
   padding: 5px 30px;
   border-radius: 15px 15px 60px 15px;
   font-size: 1.2rem;
-  box-shadow: -1px 1px grey;
+  box-shadow: -4px 4px black;
 }

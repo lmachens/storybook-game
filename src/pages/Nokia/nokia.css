@@ -1,0 +1,18 @@
+.mainMF {
+  background-color: #545d66;
+  width: 100vw;
+  height: 100vh;
+  border: 15px solid #545d66;
+}
+
+.mainMF > div:last-child {
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.mainMF > div:first-child > div:last-child {
+  border: 10px inset #d1d2ca;
+  border-radius: 10px 10px 20px 20px;
+}
