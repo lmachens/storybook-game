@@ -71,8 +71,8 @@ const createPlayer = () => {
 const createObstacle = () => {
   return {
     left: setRandomPosition(COLS), // start position
-    top: 10,
-    // setRandomPosition(ROWS), // start position
+    top: setRandomPosition(ROWS),
+    // start position
   };
 };
 
@@ -109,10 +109,12 @@ export const createGame = (width, height) => {
   const canvas = createCanvas();
   let player = createPlayer();
 
-  let obstacle = "";
-  setTimeout(function () {
+  let obstacles = [{ left: 5, top: 1 }];
+  let i = 0;
+  setInterval(function () {
     console.log("Alert");
-    obstacle = createObstacle();
+    obstacles.push(createObstacle());
+    i++;
   }, 3000);
 
   resize(canvas, width, height);
@@ -123,38 +125,40 @@ export const createGame = (width, height) => {
 
     const loop = () => {
       clear(canvas);
+
       const now = Date.now();
       movePlayer(player, now - lastDrawing);
 
       drawPlayer(canvas, player);
-      drawObstacle(canvas, obstacle);
+
+      obstacles.forEach((obstacle) => {
+        drawObstacle(canvas, obstacle);
+      });
 
       lastDrawing = now;
 
-      createObstacle();
+      // function calcDistance() {
+      //   let topDistance = player.top - obstacle.top;
+      //   let leftDistance = player.left - obstacle.left;
 
-      function calcDistance() {
-        let topDistance = player.top - obstacle.top;
-        let leftDistance = player.left - obstacle.left;
+      //   topDistance *= topDistance;
+      //   leftDistance *= leftDistance;
 
-        topDistance *= topDistance;
-        leftDistance *= leftDistance;
+      //   return Math.sqrt(topDistance + leftDistance);
+      // }
 
-        return Math.sqrt(topDistance + leftDistance);
-      }
-
-      let distance = calcDistance();
-      if (distance < 1) {
-        player.speed = 0;
-        let restart = confirm("Restart?");
-        if (restart == true) {
-          player = createPlayer();
-        } else {
-          alert("Thanks for playing");
-          player.left = 8;
-          player.top = 8;
-        }
-      }
+      // let distance = calcDistance();
+      // if (distance < 1) {
+      //   player.speed = 0;
+      //   let restart = confirm("Restart?");
+      //   if (restart == true) {
+      //     player = createPlayer();
+      //   } else {
+      //     alert("Thanks for playing");
+      //     player.left = 8;
+      //     player.top = 8;
+      //   }
+      // }
 
       requestAnimationFrame(loop);
     };
