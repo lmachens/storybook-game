@@ -1,7 +1,7 @@
 import { createElement } from "../../utils/elements";
 
-const COLS = 16;
-const ROWS = 16;
+const COLS = 24;
+const ROWS = 24;
 const KEY = {
   LEFT: 37,
   TOP: 38,
@@ -110,11 +110,11 @@ export const createGame = (width, height) => {
   let player = createPlayer();
 
   let obstacles = [{ left: 5, top: 1 }];
-  let i = 0;
+
   setInterval(function () {
     console.log("Alert");
     obstacles.push(createObstacle());
-    i++;
+    player.speed = player.speed + 0.5;
   }, 3000);
 
   resize(canvas, width, height);
@@ -137,28 +137,30 @@ export const createGame = (width, height) => {
 
       lastDrawing = now;
 
-      // function calcDistance() {
-      //   let topDistance = player.top - obstacle.top;
-      //   let leftDistance = player.left - obstacle.left;
+      obstacles.forEach((obstacle) => {
+        function calcDistance() {
+          let topDistance = player.top - obstacle.top;
+          let leftDistance = player.left - obstacle.left;
 
-      //   topDistance *= topDistance;
-      //   leftDistance *= leftDistance;
+          topDistance *= topDistance;
+          leftDistance *= leftDistance;
 
-      //   return Math.sqrt(topDistance + leftDistance);
-      // }
+          return Math.sqrt(topDistance + leftDistance);
+        }
 
-      // let distance = calcDistance();
-      // if (distance < 1) {
-      //   player.speed = 0;
-      //   let restart = confirm("Restart?");
-      //   if (restart == true) {
-      //     player = createPlayer();
-      //   } else {
-      //     alert("Thanks for playing");
-      //     player.left = 8;
-      //     player.top = 8;
-      //   }
-      // }
+        let distance = calcDistance();
+        if (distance < 1) {
+          player.speed = 0;
+          let restart = confirm("Restart?");
+          if (restart == true) {
+            player = createPlayer();
+          } else {
+            alert("Thanks for playing");
+            player.left = 8;
+            player.top = 8;
+          }
+        }
+      });
 
       requestAnimationFrame(loop);
     };
