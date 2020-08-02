@@ -114,6 +114,7 @@ const createObstacle = () => {
 };
 const createPill = () => {
   return {
+    id: id++,
     left: setRandomPosition(COLS), // start position
     top: setRandomPosition(ROWS), // start position
   };
@@ -149,6 +150,9 @@ const movePlayer = (player, timePassed) => {
 };
 let obstacles = [];
 let pills = [];
+// TO DO -
+// Look for better way to declare ID
+let id = 1;
 
 export const createGame = (width, height) => {
   const canvas = createCanvas();
@@ -159,8 +163,8 @@ export const createGame = (width, height) => {
     player.speed = player.speed * 1.05;
   }, 3000);
 
-  setInterval(function () {
-    pills.push(createPill());
+  setInterval(function (id) {
+    pills.push(createPill(id));
   }, 4000);
 
   resize(canvas, width, height);
@@ -200,7 +204,15 @@ export const createGame = (width, height) => {
 
         let distancePill = calcDistancePill();
         if (distancePill < 1) {
-          console.log("Pill Eaten");
+          let newID = pills.filter((pills) => {
+            // console.log(pill);
+            return pills.id !== pill.id;
+          });
+
+          pills = newID;
+          // const newPills = pills.filter(id !== pills.id);
+          // console.log(newPills);
+          // const newPills = pills.filter(pills.id !=== pills.id)
         }
       });
 
