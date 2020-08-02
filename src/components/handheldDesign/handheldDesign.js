@@ -4,7 +4,7 @@ import joyBtnImg from "../../assets/imgHandheldDesign/joystick.svg";
 import aBtnImg from "../../assets/imgHandheldDesign/aButton.svg";
 import bBtnImg from "../../assets/imgHandheldDesign/bButton.svg";
 import speakImg from "../../assets/imgHandheldDesign/speaker.svg";
-import { basic } from "../game/game.stories";
+// import { basic } from "../game/game.stories";
 
 export const createHandheldBody = () => {
   const body = createElement("div", { className: "gameBody" });
