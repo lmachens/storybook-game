@@ -12,7 +12,7 @@
 }
 
 .gameBody__display {
-  margin: 47px;
+  margin: 47px 47px 0 47px;
   grid-column: 2 / 3;
   grid-row: 1 / 2;
   justify-self: center;
@@ -36,4 +36,60 @@
   display: grid;
   grid-template-columns: auto auto auto;
   grid-template-rows: auto;
+}
+
+.starButton {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  top: 722px;
+  left: 647px;
+  width: 163px;
+  height: 162px;
+  justify-self: center;
+  margin: 0 40px 30px 0;
+}
+
+.joystick {
+  /* grid-column: 2 / 3;
+  grid-row: 1 / 2; */
+  grid-area: 1 / 2 2 / 3;
+  top: 589px;
+  left: 787px;
+  width: 156px;
+  height: 161px;
+  justify-self: end;
+  margin: 30px 0 0 80px;
+}
+
+.aButton {
+  grid-column: 3 / 4;
+  grid-row: 2 / 3;
+  top: 754px;
+  left: 1087px;
+  width: 86px;
+  height: 86px;
+  justify-self: end;
+}
+
+.bButton {
+  grid-column: 4 / 5;
+  grid-row: 1 / 2;
+  top: 663px;
+  left: 1182px;
+  width: 86px;
+  height: 86px;
+  align-self: end;
+}
+
+.speaker {
+  grid-column: 4 / 5;
+  grid-row: 2 / 3;
+  align-self: end;
+  justify-self: end;
+  margin: 0 40px 60px 0;
+}
+
+.gameBody__display--game {
+  height: 100px;
+  width: 100px;
 }
