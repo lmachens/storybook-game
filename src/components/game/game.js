@@ -1,5 +1,6 @@
 import { createElement } from "../../utils/elements";
 import { playerImage, virusImage, pillImage } from "../../assets/images";
+import { calcDistance } from "../game/calcDistance";
 
 const COLS = 16;
 const ROWS = 16;
@@ -190,39 +191,20 @@ export const createGame = (width, height) => {
 
       lastDrawing = now;
 
-      function calcDistancePill(pill) {
-        let topDistance = player.top - pill.top;
-        let leftDistance = player.left - pill.left;
-
-        topDistance *= topDistance;
-        leftDistance *= leftDistance;
-
-        return Math.sqrt(topDistance + leftDistance);
-      }
       pills = pills.filter((pill) => {
-        let distancePill = calcDistancePill(pill);
+        let distancePill = calcDistance(player, pill);
         if (distancePill < 1) {
           virusImmune = true;
           setTimeout(function () {
             virusImmune = false;
-          }, 10000);
+          }, 5000);
           return false;
         }
         return true;
       });
 
-      obstacles.forEach((obstacle) => {
-        function calcDistanceVirus() {
-          let topDistance = player.top - obstacle.top;
-          let leftDistance = player.left - obstacle.left;
-
-          topDistance *= topDistance;
-          leftDistance *= leftDistance;
-
-          return Math.sqrt(topDistance + leftDistance);
-        }
-
-        let distance = calcDistanceVirus();
+      obstacles.find((obstacle) => {
+        let distance = calcDistance(player, obstacle);
         if (distance < 1 && !virusImmune) {
           player.speed = 0;
           aliveTime.innerText = 0;
