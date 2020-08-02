@@ -5,9 +5,15 @@ export const createRightController = () => {
   });
 
   const listWrap = createElement("div", { className: "listWrap" });
-  const scoreList = createElement("ol", { className: "scoreList" });
+  const scoreTitle = createElement("header", { innerText: "Highscore" });
+  listWrap.append(scoreTitle);
+
+  const scoreList = createElement("ol", {
+    className: "scoreList",
+  });
   sectionRightController.append(listWrap);
-  const highScores = ["10400", "9000", "8006", "7500", "4230", "1200"];
+
+  const highScores = ["10400", "9000", "8006"];
   listWrap.append(scoreList);
   highScores.forEach((item) => {
     const score = createElement("li", { innerText: item });
