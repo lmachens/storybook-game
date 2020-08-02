@@ -1,13 +1,19 @@
 import { createElement } from "../../utils/elements";
+import { playerImage, virusImage, pillImage } from "../../assets/images";
 
-const COLS = 24;
-const ROWS = 24;
+const COLS = 16;
+const ROWS = 16;
 const KEY = {
   LEFT: 37,
   TOP: 38,
   RIGHT: 39,
   BOTTOM: 40,
 };
+
+const aliveTime = createElement("div", {
+  className: "controls__time",
+  innerText: "0",
+});
 
 const createCanvas = () => {
   const canvas = createElement("canvas", { className: "game" });
@@ -36,7 +42,13 @@ const drawPlayer = (canvas, player) => {
 
   const context = canvas.getContext("2d");
   context.beginPath();
-  context.rect(offsetLeft, offsetTop, cellWidth, cellHeight);
+  // context.rect(offsetLeft, offsetTop, cellWidth, cellHeight);
+
+  context.drawImage(playerImage, offsetLeft, offsetTop, cellWidth, cellHeight);
+  // image.addEventListener("load", () => {
+  //   context.drawImage(image, offsetLeft, offsetTop, cellWidth, cellHeight);
+  // });
+
   context.fillStyle = "red";
   context.fill();
   context.closePath();
@@ -53,7 +65,33 @@ const drawObstacle = (canvas, obstacle) => {
 
   const context = canvas.getContext("2d");
   context.beginPath();
-  context.rect(offsetLeft, offsetTop, cellWidth, cellHeight);
+
+  // context.rect(offsetLeft, offsetTop, cellWidth, cellHeight);
+
+  context.drawImage(virusImage, offsetLeft, offsetTop, cellWidth, cellHeight);
+
+  context.fillStyle = "green";
+  context.fill();
+  context.closePath();
+};
+
+const drawPill = (canvas, pill) => {
+  const cellWidth = canvas.width / COLS;
+  const cellHeight = canvas.height / ROWS;
+  const offsetLeft = pill.left * cellWidth;
+  // const offsetLeft =
+  //   pill.left * cellWidth - ((pill.left * cellWidth) % cellWidth);
+  const offsetTop = pill.top * cellHeight;
+  // const offsetTop =
+  //   player.top * cellHeight - ((player.top * cellHeight) % cellHeight);
+
+  const context = canvas.getContext("2d");
+  context.beginPath();
+
+  // context.rect(offsetLeft, offsetTop, cellWidth, cellHeight);
+
+  context.drawImage(pillImage, offsetLeft, offsetTop, cellWidth, cellHeight);
+
   context.fillStyle = "green";
   context.fill();
   context.closePath();
@@ -71,8 +109,14 @@ const createPlayer = () => {
 const createObstacle = () => {
   return {
     left: setRandomPosition(COLS), // start position
-    top: setRandomPosition(ROWS),
-    // start position
+    top: setRandomPosition(ROWS), // start position
+  };
+};
+const createPill = () => {
+  return {
+    id: id++,
+    left: setRandomPosition(COLS), // start position
+    top: setRandomPosition(ROWS), // start position
   };
 };
 
@@ -105,16 +149,23 @@ const movePlayer = (player, timePassed) => {
   }
 };
 let obstacles = [];
+let pills = [];
+// TO DO -
+// Look for better way to declare ID
+let id = 1;
 
 export const createGame = (width, height) => {
   const canvas = createCanvas();
   let player = createPlayer();
 
   setInterval(function () {
-    console.log("Alert");
     obstacles.push(createObstacle());
-    player.speed = player.speed + 0.5;
+    player.speed = player.speed * 1.05;
   }, 3000);
+
+  setInterval(function (id) {
+    pills.push(createPill(id));
+  }, 4000);
 
   resize(canvas, width, height);
 
@@ -134,10 +185,39 @@ export const createGame = (width, height) => {
         drawObstacle(canvas, obstacle);
       });
 
+      pills.forEach((pill) => {
+        drawPill(canvas, pill);
+      });
+
       lastDrawing = now;
 
+      pills.forEach((pill) => {
+        function calcDistancePill() {
+          let topDistance = player.top - pill.top;
+          let leftDistance = player.left - pill.left;
+
+          topDistance *= topDistance;
+          leftDistance *= leftDistance;
+
+          return Math.sqrt(topDistance + leftDistance);
+        }
+
+        let distancePill = calcDistancePill();
+        if (distancePill < 1) {
+          let newID = pills.filter((pills) => {
+            // console.log(pill);
+            return pills.id !== pill.id;
+          });
+
+          pills = newID;
+          // const newPills = pills.filter(id !== pills.id);
+          // console.log(newPills);
+          // const newPills = pills.filter(pills.id !=== pills.id)
+        }
+      });
+
       obstacles.forEach((obstacle) => {
-        function calcDistance() {
+        function calcDistanceVirus() {
           let topDistance = player.top - obstacle.top;
           let leftDistance = player.left - obstacle.left;
 
@@ -147,9 +227,10 @@ export const createGame = (width, height) => {
           return Math.sqrt(topDistance + leftDistance);
         }
 
-        let distance = calcDistance();
+        let distance = calcDistanceVirus();
         if (distance < 1) {
           player.speed = 0;
+          aliveTime.innerText = 0;
 
           // let restart = confirm("Restart?");
           // if (restart == true) {
@@ -221,10 +302,10 @@ export const createControls = (game) => {
     Object.assign(game.player, createPlayer());
   });
 
-  const aliveTime = createElement("div", {
-    className: "controls__time",
-    innerText: "0",
-  });
+  // const aliveTime = createElement("div", {
+  //   className: "controls__time",
+  //   innerText: "0",
+  // });
 
   setInterval(() => {
     aliveTime.innerText = Math.floor(
