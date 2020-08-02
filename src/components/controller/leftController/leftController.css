@@ -27,31 +27,80 @@
 
 .keys > button {
   border-radius: 100%;
-  background: rgb(46, 47, 69);
-  background: linear-gradient(
-    0deg,
-    rgba(46, 47, 69, 1) 0%,
-    rgba(94, 94, 150, 1) 75%
-  );
   border: solid 3px rgb(46, 47, 69);
 }
 
 #btn-up {
   grid-area: 1 / 2 / 2 / 2;
+  transform: rotate(180deg);
+  background: linear-gradient(
+    180deg,
+    rgba(46, 47, 69, 1) 0%,
+    rgba(94, 94, 150, 1) 75%
+  );
+}
+
+#btn-up:active {
+  background: linear-gradient(
+    0deg,
+    rgba(46, 47, 69, 1) 0%,
+    rgba(94, 94, 150, 1) 75%
+  );
 }
 
 #btn-right {
   grid-area: 2 / 3 / 3 / 4;
+  transform: rotate(270deg);
+  background: linear-gradient(
+    90deg,
+    rgba(46, 47, 69, 1) 0%,
+    rgba(94, 94, 150, 1) 75%
+  );
 }
 
-/* #btn-middle {
-  grid-area: 2 / 2 / 3 / 3;
-} */
+#btn-right:active {
+  background: linear-gradient(
+    270deg,
+    rgba(46, 47, 69, 1) 0%,
+    rgba(94, 94, 150, 1) 75%
+  );
+}
 
 #btn-left {
   grid-area: 2 / 1 / 3 / 2;
+  transform: rotate(90deg);
+  background: linear-gradient(
+    270deg,
+    rgba(46, 47, 69, 1) 0%,
+    rgba(94, 94, 150, 1) 75%
+  );
+}
+
+#btn-left:active {
+  background: linear-gradient(
+    90deg,
+    rgba(46, 47, 69, 1) 0%,
+    rgba(94, 94, 150, 1) 75%
+  );
 }
 
 #btn-down {
   grid-area: 3 / 2 / 4 / 3;
+  transform: rotate(0deg);
+}
+
+#btn-down:active {
+  background: linear-gradient(
+    180deg,
+    rgba(46, 47, 69, 1) 0%,
+    rgba(94, 94, 150, 1) 75%
+  );
+}
+
+.btn__arrow {
+  width: 15px;
+}
+
+#btn-up__arrow {
+  transform: rotate(45deg);
 }
