@@ -3,10 +3,9 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-
-  /* width: 100vw; */
   background-color: turquoise;
   padding: 50px;
+  border-radius: 0 25px 25px 0;
 }
 
 .listWrap {
@@ -22,19 +21,44 @@
 
 .keys > button {
   border-radius: 100%;
-  background: rgb(46, 47, 69);
   background: linear-gradient(
     0deg,
     rgba(46, 47, 69, 1) 0%,
     rgba(94, 94, 150, 1) 75%
   );
   border: solid 3px rgb(46, 47, 69);
+  outline-style: none;
 }
 
 #btn-up-right {
   grid-area: 1 / 3 / 2 / 4;
+  background: linear-gradient(
+    0deg,
+    rgba(46, 47, 69, 1) 0%,
+    rgba(94, 94, 150, 1) 75%
+  );
+}
+
+#btn-up-right:active {
+  background: linear-gradient(
+    180deg,
+    rgba(46, 47, 69, 1) 0%,
+    rgba(94, 94, 150, 1) 75%
+  );
 }
 
 #btn-down-left {
   grid-area: 3 / 1 / 4 / 2;
+  background: linear-gradient(
+    0deg,
+    rgba(46, 47, 69, 1) 0%,
+    rgba(94, 94, 150, 1) 75%
+  );
+}
+#btn-down-left:active {
+  background: linear-gradient(
+    180deg,
+    rgba(46, 47, 69, 1) 0%,
+    rgba(94, 94, 150, 1) 75%
+  );
 }
