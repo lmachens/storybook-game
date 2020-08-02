@@ -153,6 +153,7 @@ let pills = [];
 // TO DO -
 // Look for better way to declare ID
 let id = 1;
+let virusImmune = false;
 
 export const createGame = (width, height) => {
   const canvas = createCanvas();
@@ -178,42 +179,36 @@ export const createGame = (width, height) => {
 
       const now = Date.now();
       movePlayer(player, now - lastDrawing);
-
       drawPlayer(canvas, player);
 
       obstacles.forEach((obstacle) => {
         drawObstacle(canvas, obstacle);
       });
-
       pills.forEach((pill) => {
         drawPill(canvas, pill);
       });
 
       lastDrawing = now;
 
-      pills.forEach((pill) => {
-        function calcDistancePill() {
-          let topDistance = player.top - pill.top;
-          let leftDistance = player.left - pill.left;
+      function calcDistancePill(pill) {
+        let topDistance = player.top - pill.top;
+        let leftDistance = player.left - pill.left;
 
-          topDistance *= topDistance;
-          leftDistance *= leftDistance;
+        topDistance *= topDistance;
+        leftDistance *= leftDistance;
 
-          return Math.sqrt(topDistance + leftDistance);
-        }
-
-        let distancePill = calcDistancePill();
+        return Math.sqrt(topDistance + leftDistance);
+      }
+      pills = pills.filter((pill) => {
+        let distancePill = calcDistancePill(pill);
         if (distancePill < 1) {
-          let newID = pills.filter((pills) => {
-            // console.log(pill);
-            return pills.id !== pill.id;
-          });
-
-          pills = newID;
-          // const newPills = pills.filter(id !== pills.id);
-          // console.log(newPills);
-          // const newPills = pills.filter(pills.id !=== pills.id)
+          virusImmune = true;
+          setTimeout(function () {
+            virusImmune = false;
+          }, 10000);
+          return false;
         }
+        return true;
       });
 
       obstacles.forEach((obstacle) => {
@@ -228,7 +223,7 @@ export const createGame = (width, height) => {
         }
 
         let distance = calcDistanceVirus();
-        if (distance < 1) {
+        if (distance < 1 && !virusImmune) {
           player.speed = 0;
           aliveTime.innerText = 0;
 
