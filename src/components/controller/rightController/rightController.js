@@ -23,10 +23,24 @@ export const createRightController = () => {
   const keys = createElement("div", { className: "keys" });
   sectionRightController.append(keys);
 
-  const buttons = ["btn-up-right", "btn-down-left"];
-  buttons.forEach((btn) => {
-    const button = createElement("button", { id: btn });
-    keys.append(button);
+  // const buttons = ["btn-up-right", "btn-down-left"];
+  // buttons.forEach((btn) => {
+  //   const button = createElement("button", { id: btn });
+
+  //   keys.append(button);
+  // });
+
+  const buttonA = createElement("button", {
+    id: "btn-up-right",
+    innerText: "A",
   });
+  keys.append(buttonA);
+
+  const buttonB = createElement("button", {
+    id: "btn-down-left",
+    innerText: "B",
+  });
+  keys.append(buttonB);
+
   return sectionRightController;
 };
