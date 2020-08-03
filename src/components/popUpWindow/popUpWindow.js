@@ -19,6 +19,6 @@ export const popUpWindow = () => {
   popUpWindow__container.append(imgContainer);
   popUp.append(textGameOVer);
   popUp.append(textInf);
-  popUpWindow__container.append(button);
+  popUp.append(button);
   return popUpWindow__container;
 };
