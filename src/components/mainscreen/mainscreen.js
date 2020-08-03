@@ -1,7 +1,6 @@
 import { createElement } from "../../utils/elements";
 
-import { OuterDiv } from "./mainscreen.stories";
-import { basic } from "../game/game.stories.js";
+// import { basic } from "../game/game.stories.js";
 import { controls } from "../game/game.stories.js";
 export const MainScreen = () => {
   const OuterDIV = createElement("div", {
@@ -13,7 +12,8 @@ export const MainScreen = () => {
   });
 
   const mainScreenDiv = createElement("div", {});
-  const gameScreen = basic();
+  // EVTL ZUR WIEDERVERWENDUNG STEHEN LASSEN
+  // const gameScreen = basic();
   const gameControls = controls();
 
   OuterDIV.append(logoDiv);
