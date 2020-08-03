@@ -27,6 +27,7 @@
   .leftController {
     width: 50%;
     min-height: 500px;
+    border-radius: 0 0 0 25px;
   }
   .rightController {
     width: 50%;
@@ -34,5 +35,6 @@
     position: absolute;
     right: 0;
     margin-top: 500px;
+    border-radius: 0 0 25px 0;
   }
 }
