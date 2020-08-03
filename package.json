@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "12.x"
+  },
   "scripts": {
+    "build": "build-storybook -c .storybook -o build",
     "deploy-storybook": "storybook-to-ghpages",
     "storybook": "start-storybook",
     "test": "htmlhint \"src/**/*.html\" && stylelint \"src/**/*.css\" && eslint \"src/**/*.js\""
