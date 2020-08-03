@@ -275,6 +275,7 @@ export const createControls = (game) => {
     className: "controls__btn",
   });
   reset.addEventListener("click", () => {
+    pills = [];
     obstacles = [];
     Object.assign(game.player, createPlayer());
   });
