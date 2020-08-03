@@ -115,7 +115,6 @@ const createObstacle = () => {
 };
 const createPill = () => {
   return {
-    id: id++,
     left: setRandomPosition(COLS), // start position
     top: setRandomPosition(ROWS), // start position
   };
@@ -151,9 +150,7 @@ const movePlayer = (player, timePassed) => {
 };
 let obstacles = [];
 let pills = [];
-// TO DO -
-// Look for better way to declare ID
-let id = 1;
+
 let virusImmune = false;
 
 export const createGame = (width, height) => {
@@ -165,8 +162,8 @@ export const createGame = (width, height) => {
     player.speed = player.speed * 1.05;
   }, 3000);
 
-  setInterval(function (id) {
-    pills.push(createPill(id));
+  setInterval(function () {
+    pills.push(createPill());
   }, 4000);
 
   resize(canvas, width, height);
@@ -280,10 +277,10 @@ export const createControls = (game) => {
     Object.assign(game.player, createPlayer());
   });
 
-  // const aliveTime = createElement("div", {
-  //   className: "controls__time",
-  //   innerText: "0",
-  // });
+  const aliveTime = createElement("div", {
+    className: "controls__time",
+    innerText: "0",
+  });
 
   setInterval(() => {
     aliveTime.innerText = Math.floor(
