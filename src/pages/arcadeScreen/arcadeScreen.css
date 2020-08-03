@@ -10,6 +10,7 @@
   height: 500px;
   display: flex;
   position: relative;
+  border-radius: 0;
 }
 
 @media only screen and (max-width: 1000px) {
