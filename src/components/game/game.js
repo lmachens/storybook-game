@@ -144,12 +144,12 @@ export const createGame = (width, height) => {
   const canvas = createCanvas();
   let player = createPlayer();
 
-  setInterval(function () {
+  const obstacleCreation = setInterval(function () {
     obstacles.push(createObstacle());
     player.speed = player.speed * 1.05;
   }, 3000);
 
-  setInterval(function () {
+  const pillCreation = setInterval(function () {
     pills.push(createPill());
   }, 4000);
 
@@ -194,6 +194,8 @@ export const createGame = (width, height) => {
           aliveTime.innerText = 0;
           pills = [];
           obstacles = [];
+          clearInterval(obstacleCreation);
+          clearInterval(pillCreation);
 
           const popup = popUpWindow();
           document.body.append(popup);
@@ -202,6 +204,9 @@ export const createGame = (width, height) => {
       if (score > 2) {
         const endScreen = createEndscreen();
         document.body.append(endScreen);
+        clearInterval(obstacleCreation);
+        clearInterval(pillCreation);
+        score = 0;
       }
 
       requestAnimationFrame(loop);
