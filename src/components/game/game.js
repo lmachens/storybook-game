@@ -1,6 +1,9 @@
 import { createElement } from "../../utils/elements";
 import { playerImage, virusImage, pillImage } from "../../assets/images";
 import { calcDistance } from "../game/calcDistance";
+import mainStories from "../../pages/main/main.stories";
+import { popUpWindow } from "../popUpWindow/popUpWindow";
+import { createEndscreen } from "../suvivedEndScreen/endscreen";
 
 const COLS = 16;
 const ROWS = 16;
@@ -35,20 +38,13 @@ const drawPlayer = (canvas, player) => {
   const cellWidth = canvas.width / COLS;
   const cellHeight = canvas.height / ROWS;
   const offsetLeft = player.left * cellWidth;
-  // const offsetLeft =
-  //   player.left * cellWidth - ((player.left * cellWidth) % cellWidth);
+
   const offsetTop = player.top * cellHeight;
-  // const offsetTop =
-  //   player.top * cellHeight - ((player.top * cellHeight) % cellHeight);
 
   const context = canvas.getContext("2d");
   context.beginPath();
-  // context.rect(offsetLeft, offsetTop, cellWidth, cellHeight);
 
   context.drawImage(playerImage, offsetLeft, offsetTop, cellWidth, cellHeight);
-  // image.addEventListener("load", () => {
-  //   context.drawImage(image, offsetLeft, offsetTop, cellWidth, cellHeight);
-  // });
 
   context.fillStyle = "red";
   context.fill();
@@ -58,16 +54,11 @@ const drawObstacle = (canvas, obstacle) => {
   const cellWidth = canvas.width / COLS;
   const cellHeight = canvas.height / ROWS;
   const offsetLeft = obstacle.left * cellWidth;
-  // const offsetLeft =
-  //   obstacle.left * cellWidth - ((obstacle.left * cellWidth) % cellWidth);
+
   const offsetTop = obstacle.top * cellHeight;
-  // const offsetTop =
-  //   player.top * cellHeight - ((player.top * cellHeight) % cellHeight);
 
   const context = canvas.getContext("2d");
   context.beginPath();
-
-  // context.rect(offsetLeft, offsetTop, cellWidth, cellHeight);
 
   context.drawImage(virusImage, offsetLeft, offsetTop, cellWidth, cellHeight);
 
@@ -80,16 +71,11 @@ const drawPill = (canvas, pill) => {
   const cellWidth = canvas.width / COLS;
   const cellHeight = canvas.height / ROWS;
   const offsetLeft = pill.left * cellWidth;
-  // const offsetLeft =
-  //   pill.left * cellWidth - ((pill.left * cellWidth) % cellWidth);
+
   const offsetTop = pill.top * cellHeight;
-  // const offsetTop =
-  //   player.top * cellHeight - ((player.top * cellHeight) % cellHeight);
 
   const context = canvas.getContext("2d");
   context.beginPath();
-
-  // context.rect(offsetLeft, offsetTop, cellWidth, cellHeight);
 
   context.drawImage(pillImage, offsetLeft, offsetTop, cellWidth, cellHeight);
 
@@ -150,6 +136,7 @@ const movePlayer = (player, timePassed) => {
 };
 let obstacles = [];
 let pills = [];
+let score = 0;
 
 let virusImmune = false;
 
@@ -170,7 +157,6 @@ export const createGame = (width, height) => {
 
   const startLoop = () => {
     let lastDrawing = Date.now();
-    console.log("Start Loop");
 
     const loop = () => {
       clear(canvas);
@@ -191,6 +177,7 @@ export const createGame = (width, height) => {
       pills = pills.filter((pill) => {
         let distancePill = calcDistance(player, pill);
         if (distancePill < 1) {
+          score++;
           virusImmune = true;
           setTimeout(function () {
             virusImmune = false;
@@ -205,19 +192,17 @@ export const createGame = (width, height) => {
         if (distance < 1 && !virusImmune) {
           player.speed = 0;
           aliveTime.innerText = 0;
+          pills = [];
+          obstacles = [];
 
-          // let restart = confirm("Restart?");
-          // if (restart == true) {
-          //   player = createPlayer();
-          //
-          //   player.aliveSince = Date.now();
-          // } else {
-          //   alert("Thanks for playing");
-          //   player.left = 8;
-          //   player.top = 8;
-          // }
+          const popup = popUpWindow();
+          document.body.append(popup);
         }
       });
+      if (score > 2) {
+        const endScreen = createEndscreen();
+        document.body.append(endScreen);
+      }
 
       requestAnimationFrame(loop);
     };
