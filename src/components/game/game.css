@@ -1,5 +1,6 @@
 .game {
-  background-color: #050505;
+  background-image: url("../../assets/dungeon-floor.png");
+  background-size: cover;
 }
 
 .container {
