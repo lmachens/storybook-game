@@ -1,0 +1,105 @@
+.leftController {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: blueviolet;
+  padding: 50px;
+  border-radius: 25px 0 0 25px;
+}
+
+.lamp {
+  width: 50px;
+  height: 20px;
+  border-radius: 15px;
+  background-color: chartreuse;
+  border: solid 2px rgb(109, 182, 1);
+}
+
+.keys {
+  width: 200px;
+  height: 200px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.keys > button {
+  border-radius: 100%;
+  border: solid 3px rgb(46, 47, 69);
+}
+
+#btn-up {
+  grid-area: 1 / 2 / 2 / 2;
+  transform: rotate(180deg);
+  background: linear-gradient(
+    180deg,
+    rgba(46, 47, 69, 1) 0%,
+    rgba(94, 94, 150, 1) 75%
+  );
+}
+
+#btn-up:active {
+  background: linear-gradient(
+    0deg,
+    rgba(46, 47, 69, 1) 0%,
+    rgba(94, 94, 150, 1) 75%
+  );
+}
+
+#btn-right {
+  grid-area: 2 / 3 / 3 / 4;
+  transform: rotate(270deg);
+  background: linear-gradient(
+    90deg,
+    rgba(46, 47, 69, 1) 0%,
+    rgba(94, 94, 150, 1) 75%
+  );
+}
+
+#btn-right:active {
+  background: linear-gradient(
+    270deg,
+    rgba(46, 47, 69, 1) 0%,
+    rgba(94, 94, 150, 1) 75%
+  );
+}
+
+#btn-left {
+  grid-area: 2 / 1 / 3 / 2;
+  transform: rotate(90deg);
+  background: linear-gradient(
+    270deg,
+    rgba(46, 47, 69, 1) 0%,
+    rgba(94, 94, 150, 1) 75%
+  );
+}
+
+#btn-left:active {
+  background: linear-gradient(
+    90deg,
+    rgba(46, 47, 69, 1) 0%,
+    rgba(94, 94, 150, 1) 75%
+  );
+}
+
+#btn-down {
+  grid-area: 3 / 2 / 4 / 3;
+  transform: rotate(0deg);
+}
+
+#btn-down:active {
+  background: linear-gradient(
+    180deg,
+    rgba(46, 47, 69, 1) 0%,
+    rgba(94, 94, 150, 1) 75%
+  );
+}
+
+.btn__arrow {
+  width: 15px;
+}
+
+#btn-up__arrow {
+  transform: rotate(45deg);
+}
