@@ -1,8 +1,8 @@
 .endscreen {
   background-image: url(../../assets/pixel_background.png);
   background-position: bottom;
-  height: 80vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-content: flex-end;
