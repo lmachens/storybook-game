@@ -1,7 +1,5 @@
 import { createElement } from "../../utils/elements";
 
-// import { basic } from "../game/game.stories.js";
-import { controls } from "../game/game.stories.js";
 export const MainScreen = () => {
   const OuterDIV = createElement("div", {
     className: "nokiaScreen",
@@ -11,14 +9,7 @@ export const MainScreen = () => {
     innerText: "neue fische",
   });
 
-  const mainScreenDiv = createElement("div", {});
-  // EVTL ZUR WIEDERVERWENDUNG STEHEN LASSEN
-  // const gameScreen = basic();
-  const gameControls = controls();
-
   OuterDIV.append(logoDiv);
-  OuterDIV.append(mainScreenDiv);
-  mainScreenDiv.prepend(gameControls);
 
   return OuterDIV;
 };
