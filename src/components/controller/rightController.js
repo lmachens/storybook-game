@@ -1,4 +1,5 @@
-import { createElement } from "../../../utils/elements";
+import { createElement } from "../../utils/elements";
+
 export const createRightController = () => {
   const sectionRightController = createElement("section", {
     className: "rightController",

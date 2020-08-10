@@ -1,5 +1,5 @@
-import { createElement } from "../../../utils/elements";
-import triangleSrc from "../../../assets/triangle.svg";
+import { createElement } from "../../utils/elements";
+import triangleSrc from "../../assets/triangle.svg";
 export const createLeftController = () => {
   const sectionLeftController = createElement("section", {
     className: "leftController",

@@ -1,6 +1,6 @@
 import { createElement } from "../../utils/elements";
-import { createLeftController } from "../../components/controller/leftController/leftController";
-import { createRightController } from "../../components/controller/rightController/rightController";
+import { createLeftController } from "../../components/controller/leftController";
+import { createRightController } from "../../components/controller/rightController";
 import { createGame } from "../../components/game/game";
 
 export const createArcade = () => {
