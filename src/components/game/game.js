@@ -1,7 +1,6 @@
 import { createElement } from "../../utils/elements";
 import { playerImage, virusImage, pillImage } from "../../assets/images";
 import { calcDistance } from "../game/calcDistance";
-import mainStories from "../../pages/main/main.stories";
 import { popUpWindow } from "../popUpWindow/popUpWindow";
 import { createEndscreen } from "../suvivedEndScreen/endscreen";
 
@@ -204,7 +203,7 @@ export const createGame = (width, height) => {
       });
       if (score > 2) {
         const endScreen = createEndscreen();
-        document.body.append(endScreen);
+        container.append(endScreen);
         clearInterval(obstacleCreation);
         clearInterval(pillCreation);
         score = 0;
