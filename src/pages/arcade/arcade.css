@@ -1,4 +1,4 @@
-.arcadeScreenContainer {
+.arcadeContainer {
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -14,7 +14,7 @@
 }
 
 @media only screen and (max-width: 1000px) {
-  .arcadeScreenContainer {
+  .arcadeContainer {
     height: 100%;
   }
   .arcadeConsole {

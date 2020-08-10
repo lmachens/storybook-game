@@ -20,5 +20,8 @@ export const popUpWindow = () => {
   popUp.append(textGameOVer);
   popUp.append(textInf);
   popUp.append(button);
+  button.addEventListener("click", () =>
+    popUpWindow__container.parentElement.removeChild(popUpWindow__container)
+  );
   return popUpWindow__container;
 };

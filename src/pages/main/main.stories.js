@@ -2,7 +2,6 @@ import "./main.css";
 import { createMain } from "./main";
 import { createGame } from "../../components/game/game";
 import { createElement } from "../../utils/elements";
-import { popUpWindow } from "../../components/popUpWindow/popUpWindow";
 
 export default { title: "Pages/Main" };
 

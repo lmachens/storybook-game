@@ -141,6 +141,7 @@ let score = 0;
 let virusImmune = false;
 
 export const createGame = (width, height) => {
+  const container = createElement("div", { className: "container" });
   const canvas = createCanvas();
   let player = createPlayer();
 
@@ -198,7 +199,7 @@ export const createGame = (width, height) => {
           clearInterval(pillCreation);
 
           const popup = popUpWindow();
-          document.body.append(popup);
+          container.append(popup);
         }
       });
       if (score > 2) {
@@ -235,7 +236,8 @@ export const createGame = (width, height) => {
 
   startLoop();
 
-  return { canvas, player, obstacles };
+  container.append(canvas);
+  return { canvas: container, player, obstacles };
 };
 
 export const createControls = (game) => {

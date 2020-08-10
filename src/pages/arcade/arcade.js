@@ -3,9 +3,9 @@ import { createLeftController } from "../../components/controller/leftController
 import { createRightController } from "../../components/controller/rightController/rightController";
 import { createGame } from "../../components/game/game";
 
-export const createArcadeScreen = () => {
-  const arcadeScreenContainer = createElement("div", {
-    className: "arcadeScreenContainer",
+export const createArcade = () => {
+  const arcadeContainer = createElement("div", {
+    className: "arcadeContainer",
   });
   const arcadeConsole = createElement("main", { className: "arcadeConsole" });
   const leftController = createLeftController();
@@ -14,9 +14,9 @@ export const createArcadeScreen = () => {
   const game = createGame(500, 500);
   game.canvas.classList.add("gameDisplay");
 
-  arcadeScreenContainer.append(arcadeConsole);
+  arcadeContainer.append(arcadeConsole);
   arcadeConsole.append(leftController);
   arcadeConsole.append(game.canvas);
   arcadeConsole.append(rightController);
-  return arcadeScreenContainer;
+  return arcadeContainer;
 };
